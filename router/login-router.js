@@ -3,6 +3,8 @@ var router = express.Router()
 var bodyParser = require('body-parser');
 const db = require('../settings/database.js');
 const connection = require('../settings/database.js');
+var resModel = require('../public/response-model.js')
+var consts = require('../public/constants.js')
 
 router.use(bodyParser.urlencoded({extended: false}))
 
@@ -27,22 +29,23 @@ router.post('/login', (req, res) => {
         console.log(`EXECUTE QUERY - ${sql}`)
         if(err != null) {
             console.log('Error quering databse, error : ', err)
-            res.send({result: false, msg: 'ERROR'})
+            res.send(resModel.getResponseModel(false, 'ERROR'))
         } else if(typeof row == 'undefined' || row == null || row.length < 1) {
-            res.send({result: false, msg: '존재하지 않거나 비밀번호가 잘못되었습니다.'})
+            res.send(resModel.getResponseModel(false, '존재하지 않거나 비밀번호가 잘못되었습니다.', null))
         } else {
             let user = row[0]
             if(body.password == user.USER_PASSWORD) {
-                res.send({result: true, msg: ''})
+                let sess = req.session
+                sess.isLoggedin = true
+                sess[consts.USER_SESSION_INFO] = row[0]
+                console.log('#### SESS : ', sess)
+                res.send(resModel.getResponseModel(true))
             } else {
-                res.send({result: false, msg: '존재하지 않거나 비밀번호가 잘못되었습니다.'})
+                res.send(resModel.getResponseModel(false, '존재하지 않거나 비밀번호가 잘못되었습니다.'))
             }
         }
     })
     
-    // getConnection().query(sql, [body.id], (err, result) => {
-    //     console.log(`##### QUERY : ${sql}\n##### RESULT : ${result}`)
-    // })
 })
 
 module.exports = router
