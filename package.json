@@ -1,0 +1,24 @@
+{
+  "name": "express-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "start",
+    "stop": "stop"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/downingmoon/Express-practice.git"
+  },
+  "author": "downingmoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/downingmoon/Express-practice/issues"
+  },
+  "homepage": "https://github.com/downingmoon/Express-practice#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
