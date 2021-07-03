@@ -16,15 +16,4 @@ if(connection.state == 'disconnected') {
     connection.connect()
 }
 
-// function connectDatabase() {
-//     try {
-//         connection.connect()
-//     } catch (err) {
-//         console.error('Error connecting Databse.\n ERR : ', err)
-//     }
-// }
-// function closeConn() {
-//     connection.end()
-// }
-
 module.exports = connection
