@@ -36,6 +36,7 @@ router.post('/login', (req, res) => {
             let user = row[0]
             if(body.password == user.USER_PASSWORD) {
                 let sess = req.session
+                
                 sess.isLoggedin = true
                 sess[consts.USER_SESSION_INFO] = row[0]
                 console.log('#### SESS : ', sess)
