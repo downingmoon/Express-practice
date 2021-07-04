@@ -1,4 +1,10 @@
 /* HEADER */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: #fff;
+}
 .menu {
     display: flex;
     height: 40px;
@@ -20,9 +26,8 @@
 
 /* FOOTER */
 footer {
-    position: absolute;
     width: 100%;
-    bottom: 0;
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 30px;
 }

@@ -6,13 +6,280 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <%- include('./common/imports') %> 
+    <style>
+        .container {
+            padding: 0px 50px;
+            margin-top: 40px;
+        }
+        .row:not(:first-child) {
+            margin-top: 25px;
+        }
+        .profile-box {
+            margin-top: 30px;
+            height: 60px;
+        }
+        .profile {
+            width: 60px;
+            float: left;
+            margin-right: 10px;
+        }
+        .profile img {
+            width: 100%;
+        }
+        .profile-info {
+            width: auto;
+        }
+        .name {
+            height: 30px;
+            line-height: 30px;
+            font-weight: bold;
+            font-size: 13pt;
+        }
+        .assets {
+            height: 30px;
+            line-height: 30px;
+            font-size: 11pt;
+        }
+        .assets .assets-text {
+            color: #9a9a9a;
+        }
+
+        .sub-title {
+            font-weight: bold;
+            font-size: 14pt;
+        }
+        .card-count {
+            color: #9a9a9a;
+        }
+        #card-swiper {
+            margin-top: 10px;
+            font-weight: bold;
+            font-size: 13pt;
+        }
+        #card-swiper .swiper-slide {
+            height: 150px;
+            background-color: #f3f3f3;
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .finpluencer-profile-box {
+            margin-top: 30px;
+            height: 60px;
+            position: relative;
+        }
+        .finpluencer-profile {
+            width: 60px;
+            float: left;
+            margin-right: 10px;
+        }
+        .finpluencer-profile img {
+            width: 100%;
+        }
+        .finpluencer-profile-info {
+            width: calc(100% - 60px);
+            margin-left: auto;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .finpluencer-name {
+            height: 20px;
+            line-height: 20px;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .finpluencer-follower {
+            height: 20px;
+            line-height: 20px;
+            font-size: 9pt;
+        }
+        .finpluencer-follower .follower-text {
+            color: #9a9a9a;
+        }
+        .finpluencer-recipe {
+            height: 20px;
+            line-height: 20px;
+            font-size: 9pt;
+        }
+        .finpluencer-recipe .recipe-text {
+            color: #9a9a9a;
+        }
+        .finpluencer-rate {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-15px);
+            color: #ffe100;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            var cardSwiper = new Swiper("#card-swiper", {
+                height: 150,
+                width: 250,
+                spaceBetween: 10,
+                loop: false,
+                freeMode: true
+            })
+        })
+    </script>
 </head>
 <body>
     <%- include('./common/header') %> 
     <div class="container">
-
+        <div class="row">
+            <div class="col-auto">
+                <div class="profile-box">
+                    <% if (isLoggedin) { %>
+                        <div class="profile">
+                            <img src="/resources/images/no-image.png" alt="">
+                        </div>
+                        <div class="profile-info">
+                            <div class="name">
+                                문다운
+                            </div>
+                            <div class="assets">
+                                <span class="assets-text">자산</span>
+                                <span class="assets-total">15,323,232</span>
+                            </div>
+                        </div>
+                        <% } else { %>
+                            <div class="profile">
+                                <img src="/resources/images/no-image.png" alt="">
+                            </div>
+                            <div class="profile-info">
+                                <div class="name">
+                                    로그인 필요
+                                </div>
+                                <div class="assets">
+                                    <span class="assets-text">자산</span>
+                                    <span class="assets-total">-</span>
+                                </div>
+                            </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sub-title">
+                목표카드 <span class="card-count">2개</span>
+            </div>
+            <div class="col-12">
+                <div class="swiper-container" id="card-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            은퇴자금
+                        </div>
+                        <div class="swiper-slide">
+                            내집마련
+                        </div>
+                        <div class="swiper-slide">
+                            목표카드 추가 <i class="fas fa-plus"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="sub-title">
+                핀플루언서
+            </div>
+            <div class="col-12 finpluencer-item">
+                <div class="finpluencer-profile-box">
+                    <div class="finpluencer-profile">
+                        <img src="/resources/images/no-image.png" alt="">
+                    </div>
+                    <div class="finpluencer-profile-info">
+                        <div class="finpluencer-name">
+                            문다운
+                        </div>
+                        <div class="finpluencer-follower">
+                            <span class="follower-text">팔로워</span>
+                            <span class="follower-total">100만</span>
+                        </div>
+                        <div class="finpluencer-recipe">
+                            <span class="recipe-text">레시피</span>
+                            <span class="recipe-total">110</span>
+                        </div>
+                    </div>
+                    <div class="finpluencer-rate">
+                        +50.5%
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 finpluencer-item">
+                <div class="finpluencer-profile-box">
+                    <div class="finpluencer-profile">
+                        <img src="/resources/images/no-image.png" alt="">
+                    </div>
+                    <div class="finpluencer-profile-info">
+                        <div class="finpluencer-name">
+                            문다운
+                        </div>
+                        <div class="finpluencer-follower">
+                            <span class="follower-text">팔로워</span>
+                            <span class="follower-total">100만</span>
+                        </div>
+                        <div class="finpluencer-recipe">
+                            <span class="recipe-text">레시피</span>
+                            <span class="recipe-total">110</span>
+                        </div>
+                    </div>
+                    <div class="finpluencer-rate">
+                        +50.5%
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 finpluencer-item">
+                <div class="finpluencer-profile-box">
+                    <div class="finpluencer-profile">
+                        <img src="/resources/images/no-image.png" alt="">
+                    </div>
+                    <div class="finpluencer-profile-info">
+                        <div class="finpluencer-name">
+                            문다운
+                        </div>
+                        <div class="finpluencer-follower">
+                            <span class="follower-text">팔로워</span>
+                            <span class="follower-total">100만</span>
+                        </div>
+                        <div class="finpluencer-recipe">
+                            <span class="recipe-text">레시피</span>
+                            <span class="recipe-total">110</span>
+                        </div>
+                    </div>
+                    <div class="finpluencer-rate">
+                        +50.5%
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 finpluencer-item">
+                <div class="finpluencer-profile-box">
+                    <div class="finpluencer-profile">
+                        <img src="/resources/images/no-image.png" alt="">
+                    </div>
+                    <div class="finpluencer-profile-info">
+                        <div class="finpluencer-name">
+                            문다운
+                        </div>
+                        <div class="finpluencer-follower">
+                            <span class="follower-text">팔로워</span>
+                            <span class="follower-total">100만</span>
+                        </div>
+                        <div class="finpluencer-recipe">
+                            <span class="recipe-text">레시피</span>
+                            <span class="recipe-total">110</span>
+                        </div>
+                    </div>
+                    <div class="finpluencer-rate">
+                        +50.5%
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <h3>Hello Express</h3>
     <%- include('./common/footer') %> 
 </body>
 </html>

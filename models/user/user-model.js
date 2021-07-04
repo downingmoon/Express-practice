@@ -7,12 +7,14 @@ const db = require('../../settings/database.js')
 function selectUserInfoWithId(params) {
     let sql = `
     SELECT
-        USER_NO,
-        USER_ID,
-        USER_PASSWORD,
-        USER_PROFILE_IMG,
-        USER_NAME
-    FROM MD_USER
+        A.USER_NO,
+        A.USER_ID,
+        A.USER_PASSWORD,
+        A.USER_PROFILE_IMG,
+        A.USER_NAME,
+        B.USER_ASSETS
+    FROM MD_USER A
+    LEFT JOIN MD_USER_ASSETS B ON A.USER_NO = B.USER_NO
     WHERE USER_ID = ?`
 
     return new Promise(resolve => {

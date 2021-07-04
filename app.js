@@ -28,16 +28,13 @@ app.use(session({
 
 // Router
 var loginRouter = require('./router/login-router.js')
+var mainRouter = require('./router/main-router.js')
 app.use(loginRouter)
+app.use(mainRouter)
 
 // Ejs
 app.set('view engine', 'ejs')
 app.set('views', './views')
-
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-	res.render('index')
-});
 
 app.listen(80, () => {
 	console.log('App Started')
