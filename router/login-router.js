@@ -18,12 +18,6 @@ router.get('/login', (req, res) => {
     } else {
         res.render('./login/login', {})
     }
-    // fs.readFile('./login/login.html', 'UTF-8', (err, data) => {
-    //     res.send(ejs.render(data, {
-    //         data: null,
-    //         foo: 'bar'
-    //     }))
-    // })
 })
 
 // Do Login
@@ -39,7 +33,7 @@ router.post('/login', async (req, res) => {
         if(body.password == user.USER_PASSWORD) {
             let sess = req.session
             sess.isLoggedin = true
-            sess[consts.USER_SESSION_INFO] = row[0]
+            sess[consts.USER_SESSION_INFO] = user
             res.send(resModel.getResponseModel(true))
         } else {
             res.send(resModel.getResponseModel(false, '존재하지 않거나 비밀번호가 잘못되었습니다.'))

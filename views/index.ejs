@@ -134,30 +134,30 @@
                 <div class="profile-box">
                     <% if (isLoggedin) { %>
                         <div class="profile">
+                            <img src="<%=sessionUserInfo.USER_PROFILE_IMG%>" alt="" onerror="javascript:this.src='/resources/images/no-image.png'">
+                        </div>
+                        <div class="profile-info">
+                            <div class="name">
+                                <%= sessionUserInfo.USER_NAME %> 
+                            </div>
+                            <div class="assets">
+                                <span class="assets-text">자산</span>
+                                <span class="assets-total"><%= (sessionUserInfo.USER_ASSETS != null ? sessionUserInfo.USER_ASSETS.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") : '-') %></span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="profile">
                             <img src="/resources/images/no-image.png" alt="">
                         </div>
                         <div class="profile-info">
                             <div class="name">
-                                문다운
+                                로그인 필요
                             </div>
                             <div class="assets">
                                 <span class="assets-text">자산</span>
-                                <span class="assets-total">15,323,232</span>
+                                <span class="assets-total">-</span>
                             </div>
                         </div>
-                        <% } else { %>
-                            <div class="profile">
-                                <img src="/resources/images/no-image.png" alt="">
-                            </div>
-                            <div class="profile-info">
-                                <div class="name">
-                                    로그인 필요
-                                </div>
-                                <div class="assets">
-                                    <span class="assets-text">자산</span>
-                                    <span class="assets-total">-</span>
-                                </div>
-                            </div>
                     <% } %>
                 </div>
             </div>
