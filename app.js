@@ -29,8 +29,10 @@ app.use(session({
 // Router
 var loginRouter = require('./router/login-router.js')
 var mainRouter = require('./router/main-router.js')
+var cardRouter = require('./router/target-card-router.js')
 app.use(loginRouter)
 app.use(mainRouter)
+app.use(cardRouter)
 
 // Ejs
 app.set('view engine', 'ejs')

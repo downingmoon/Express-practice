@@ -123,6 +123,56 @@
                 loop: false,
                 freeMode: true
             })
+
+            // 목표카드 저장
+            $("button[data-role=save]").click(function() {
+                var reg = /^[0-9]*$/
+                var data = {}
+                var cardTitle = $("input[name=cardTitle]").val()
+                var cardTargetMoney = $("input[name=cardTargetMoney]").val()
+                var cardCurrentMoney = $("input[name=cardCurrentMoney]").val()
+
+                if(isBlank(cardTitle)) {
+                    alert("목표를 입력해주세요.")
+                    return false
+                }
+                if(cardTitle.length > 10) {
+                    alert('목표는 10자 이내로 입력해주세요.')
+                    return false
+                }
+                if(isBlank(cardTargetMoney)) {
+                    alert("목표 금액을 입력해주세요.")
+                    return false
+                }
+                if((!reg.test(cardTargetMoney)) || cardTargetMoney.length > 15) {
+                    alert("목표 금액은 숫자 15자까지 입력해주세요.")
+                    return false
+                }
+                if(isBlank(cardCurrentMoney)) {
+                    alert("현재 금액을 입력해주세요.")
+                    return false
+                }
+                if((!reg.test(cardCurrentMoney)) || cardCurrentMoney.length > 15) {
+                    alert("현재 금액은 숫자 15자까지 입력해주세요.")
+                    return false
+                }
+
+                data.cardTitle = cardTitle
+                data.cardTargetMoney = cardTargetMoney
+                data.cardCurrentMoney = cardCurrentMoney
+
+                $.ajax({
+                    url: '/target-card/insert',
+                    type: 'POST',
+                    data: data,
+                    success: function(d) {
+                        alert(d.msg)
+                        if(d.result) {
+                            location.reload()
+                        }
+                    }
+                })
+            })
         })
     </script>
 </head>
@@ -134,7 +184,7 @@
                 <div class="profile-box">
                     <% if (isLoggedin) { %>
                         <div class="profile">
-                            <img src="<%=sessionUserInfo.USER_PROFILE_IMG%>" alt="" onerror="javascript:this.src='/resources/images/no-image.png'">
+                            <img src="<%= sessionUserInfo.USER_PROFILE_IMG %>" alt="" onerror="javascript:this.src='/resources/images/no-image.png'">
                         </div>
                         <div class="profile-info">
                             <div class="name">
@@ -164,19 +214,20 @@
         </div>
         <div class="row">
             <div class="sub-title">
-                목표카드 <span class="card-count">2개</span>
+                목표카드 <span class="card-count"><%=(targetCardList == null ? 0 : targetCardList.length)%>개</span>
             </div>
             <div class="col-12">
                 <div class="swiper-container" id="card-swiper">
                     <div class="swiper-wrapper">
+                        <% if(targetCardList != null) { %>
+                            <% targetCardList.forEach(row => { %>
+                                <div class="swiper-slide">
+                                    <%=row.CARD_TITLE%>
+                                </div>
+                            <% }) %>
+                        <% } %>
                         <div class="swiper-slide">
-                            은퇴자금
-                        </div>
-                        <div class="swiper-slide">
-                            내집마련
-                        </div>
-                        <div class="swiper-slide">
-                            목표카드 추가 <i class="fas fa-plus"></i>
+                            <span data-target="#target-card-modal" data-toggle="modal">목표카드 추가 <i class="fas fa-plus"></i></span>
                         </div>
                     </div>
                 </div>
@@ -276,6 +327,33 @@
                     <div class="finpluencer-rate">
                         +50.5%
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="target-card-modal">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">목표카드 추가</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="card1">목표</label>
+                        <input type="text" name="cardTitle" id="card1" class="form-control" placeholder="최대 10자까지 입력가능">
+                    </div>
+                    <div class="form-group">
+                        <label for="card1">목표금액</label>
+                        <input type="text" name="cardTargetMoney" id="card1" class="form-control" placeholder="숫자 15자 까지 입력가능">
+                    </div>
+                    <div class="form-group">
+                        <label for="card1">현재금액</label>
+                        <input type="text" name="cardCurrentMoney" id="card1" class="form-control" placeholder="숫자 15자 까지 입력가능">
+                    </div>
+                </div>
+                <div class="modal-footer text-right">
+                    <button type="button" class="btn btn-sm btn-success" data-role=save>저장</button>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">닫기</button>
                 </div>
             </div>
         </div>

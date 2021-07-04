@@ -20,9 +20,6 @@ function selectUserInfoWithId(params) {
     return new Promise(resolve => {
         db.query(sql, params, (err, row) => {
             console.log(`EXECUTE QUERY - ${sql}`)
-            console.log(row)
-            console.log('--------')
-            console.log(row[0].USER_NAME)
             resolve(row)
         })
     })
