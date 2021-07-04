@@ -51,7 +51,7 @@
                     data: data,
                     success: (result) => {
                         if(result.result) {
-                            alert('로그인 성공')
+                            location.href = '/'
                         } else {
                             alert(result.msg)
                         }

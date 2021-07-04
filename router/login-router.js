@@ -41,8 +41,6 @@ router.post('/login', (req, res) => {
                 let sess = req.session
                 sess.isLoggedin = true
                 sess[consts.USER_SESSION_INFO] = row[0]
-                console.log('#### SESS : ', sess)
-                
                 res.send(resModel.getResponseModel(true))
             } else {
                 res.send(resModel.getResponseModel(false, '존재하지 않거나 비밀번호가 잘못되었습니다.'))
