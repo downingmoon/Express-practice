@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 var consts = require('../public/constants.js')
 
 var cardModel = require('../models/card/card-model.js')
+var finlpluencerModel = require('../models/finpluencer/finpluencer-model.js')
 
 var router = express.Router()
 router.use(bodyParser.urlencoded({extended: false}))
@@ -16,6 +17,7 @@ router.get('/', async function (req, res) {
         data.sessionUserInfo = sess[consts.USER_SESSION_INFO]
         data.targetCardList = await cardModel.selectUserCardListWithUserNo([data.sessionUserInfo.USER_NO])
     }
+    data.finpluencerList = await finlpluencerModel.selectFinpluencerList()
 	res.render('index', data)
 })
 

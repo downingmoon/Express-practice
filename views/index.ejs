@@ -237,97 +237,37 @@
             <div class="sub-title">
                 핀플루언서
             </div>
-            <div class="col-12 finpluencer-item">
-                <div class="finpluencer-profile-box">
-                    <div class="finpluencer-profile">
-                        <img src="/resources/images/no-image.png" alt="">
-                    </div>
-                    <div class="finpluencer-profile-info">
-                        <div class="finpluencer-name">
-                            문다운
-                        </div>
-                        <div class="finpluencer-follower">
-                            <span class="follower-text">팔로워</span>
-                            <span class="follower-total">100만</span>
-                        </div>
-                        <div class="finpluencer-recipe">
-                            <span class="recipe-text">레시피</span>
-                            <span class="recipe-total">110</span>
-                        </div>
-                    </div>
-                    <div class="finpluencer-rate">
-                        +50.5%
-                    </div>
+            <% if(typeof finpluencerList == 'undefined' || finpluencerList == null || finpluencerList.length < 1) { %>
+                <div class="col-12 finpluencer-item">
+                    <p>핀플루언서가 없습니다.</p>
                 </div>
-            </div>
-            <div class="col-12 finpluencer-item">
-                <div class="finpluencer-profile-box">
-                    <div class="finpluencer-profile">
-                        <img src="/resources/images/no-image.png" alt="">
-                    </div>
-                    <div class="finpluencer-profile-info">
-                        <div class="finpluencer-name">
-                            문다운
-                        </div>
-                        <div class="finpluencer-follower">
-                            <span class="follower-text">팔로워</span>
-                            <span class="follower-total">100만</span>
-                        </div>
-                        <div class="finpluencer-recipe">
-                            <span class="recipe-text">레시피</span>
-                            <span class="recipe-total">110</span>
-                        </div>
-                    </div>
-                    <div class="finpluencer-rate">
-                        +50.5%
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 finpluencer-item">
-                <div class="finpluencer-profile-box">
-                    <div class="finpluencer-profile">
-                        <img src="/resources/images/no-image.png" alt="">
-                    </div>
-                    <div class="finpluencer-profile-info">
-                        <div class="finpluencer-name">
-                            문다운
-                        </div>
-                        <div class="finpluencer-follower">
-                            <span class="follower-text">팔로워</span>
-                            <span class="follower-total">100만</span>
-                        </div>
-                        <div class="finpluencer-recipe">
-                            <span class="recipe-text">레시피</span>
-                            <span class="recipe-total">110</span>
+            <% } else { %>
+                <% finpluencerList.forEach(f => { %>
+                    <div class="col-12 finpluencer-item">
+                        <div class="finpluencer-profile-box">
+                            <div class="finpluencer-profile">
+                                <img src="<%=f.USER_PROFILE_IMG%>" alt="finpluencer profile" onerror="javascript:this.src='/resources/images/no-image.png'">
+                            </div>
+                            <div class="finpluencer-profile-info">
+                                <div class="finpluencer-name">
+                                    <%=f.USER_NAME%>
+                                </div>
+                                <div class="finpluencer-follower">
+                                    <span class="follower-text">팔로워</span>
+                                    <span class="follower-total"><%=(f.FOLLOWER_CNT >= 10000 ? parseInt(f.FOLLOWER_CNT / 10000) + '만' : f.FOLLOWER_CNT)%></span>
+                                </div>
+                                <div class="finpluencer-recipe">
+                                    <span class="recipe-text">레시피</span>
+                                    <span class="recipe-total"><%=f.RECIPE_CNT%></span>
+                                </div>
+                            </div>
+                            <div class="finpluencer-rate">
+                                +50.5%
+                            </div>
                         </div>
                     </div>
-                    <div class="finpluencer-rate">
-                        +50.5%
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 finpluencer-item">
-                <div class="finpluencer-profile-box">
-                    <div class="finpluencer-profile">
-                        <img src="/resources/images/no-image.png" alt="">
-                    </div>
-                    <div class="finpluencer-profile-info">
-                        <div class="finpluencer-name">
-                            문다운
-                        </div>
-                        <div class="finpluencer-follower">
-                            <span class="follower-text">팔로워</span>
-                            <span class="follower-total">100만</span>
-                        </div>
-                        <div class="finpluencer-recipe">
-                            <span class="recipe-text">레시피</span>
-                            <span class="recipe-total">110</span>
-                        </div>
-                    </div>
-                    <div class="finpluencer-rate">
-                        +50.5%
-                    </div>
-                </div>
+                <% }) %>
+            <% }%>
             </div>
         </div>
     </div>
